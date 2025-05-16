@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seat Selection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding: 30px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .seat-container {
+      display: inline-block;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .row {
+      display: flex;
+      justify-content: center;
+      margin: 5px 0;
+    }
+    .seat {
+      width: 40px;
+      height: 40px;
+      margin: 5px;
+      background-color: #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .seat.selected {
+      background-color: #28a745;
+      color: white;
+    }
+    .seat.occupied {
+      background-color: #6c757d;
+      cursor: not-allowed;
+    }
+    .screen {
+      background-color: #444;
+      height: 30px;
+      width: 80%;
+      margin: 20px auto;
+      border-radius: 5px;
+      color: white;
+      line-height: 30px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 16px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Select Your Seat</h2>
+  <div class="screen">SCREEN</div>
+
+  <div class="seat-container">
+    <div class="row">
+      <div class="seat">A1</div>
+      <div class="seat">A2</div>
+      <div class="seat occupied">A3</div>
+      <div class="seat">A4</div>
+    </div>
+    <div class="row">
+      <div class="seat">B1</div>
+      <div class="seat occupied">B2</div>
+      <div class="seat">B3</div>
+      <div class="seat">B4</div>
+    </div>
+    <div class="row">
+      <div class="seat">C1</div>
+      <div class="seat">C2</div>
+      <div class="seat occupied">C3</div>
+      <div class="seat">C4</div>
+    </div>
+  </div>
+
+  <button onclick="finalizeSelection()">Done</button>
+
+  <script>
+    const seats = document.querySelectorAll('.seat:not(.occupied)');
+    seats.forEach(seat => {
+      seat.addEventListener('click', () => {
+        seat.classList.toggle('selected');
+      });
+    });
+
+    function finalizeSelection() {
+      const selectedSeats = document.querySelectorAll('.seat.selected');
+      if (selectedSeats.length === 0) {
+        alert("Please select at least one seat.");
+        return;
+      }
+
+      const seatNames = Array.from(selectedSeats).map(seat => seat.textContent);
+      alert("You selected: " + seatNames.join(", "));
+      
+      // You can replace this alert with actual submission logic or go to a payment step.
+    }
+  </script>
+
+</body>
+</html>
